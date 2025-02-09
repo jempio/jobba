@@ -80,15 +80,15 @@ def get_email(message_id: str, gmail_instance=None):
                     content_type = part.get_content_type()
                     content_disposition = str(part.get("Content-Disposition"))
                     if content_type == 'text/plain' and 'attachment' not in content_disposition:
-                        email_data['text_content'] = part.get_payload(decode=True).decode()
+                        email_data['text_content'] = part.get_payload(decode=True).decode(encoding="utf-8", errors="ignore")
                     elif content_type == 'text/html' and 'attachment' not in content_disposition:
-                        email_data['html_content'] = part.get_payload(decode=True).decode()
+                        email_data['html_content'] = part.get_payload(decode=True).decode(encoding="utf-8", errors="ignore")
             else:
                 content_type = mime_msg.get_content_type()
                 if content_type == 'text/plain':
-                    email_data['text_content'] = mime_msg.get_payload(decode=True).decode()
+                    email_data['text_content'] = mime_msg.get_payload(decode=True).decode(encoding="utf-8", errors="ignore")
                 elif content_type == 'text/html':
-                    email_data['html_content'] = mime_msg.get_payload(decode=True).decode()
+                    email_data['html_content'] = mime_msg.get_payload(decode=True).decode(encoding="utf-8", errors="ignore")
                     
             
             if email_data['html_content'] and not email_data['text_content']:
