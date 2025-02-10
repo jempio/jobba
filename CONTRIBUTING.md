@@ -62,7 +62,7 @@ This project uses **Google OAuth** for authentication. To run the app locally, y
    - https://jobseeker-analytics.onrender.com/login
    - http://localhost:8000/login
 6. Copy the **Client ID** and **Client Secret** for later.  
-7. Download and save your credentials locally to the parent folder for this repo in a file named ```credentials.json```
+7. Download and save your credentials locally to the `backend` folder for this repo in a file named ```credentials.json```
 
 ---
 
@@ -73,12 +73,13 @@ This project uses **Google OAuth** for authentication. To run the app locally, y
    ```
 2. Edit the `.env` file with your credentials:  
    ```ini
-   GOOGLE_SCOPES='["https://www.googleapis.com/auth/gmail.readonly", "openid"]'
    GOOGLE_CLIENT_ID=your-client-id-here
-   GOOGLE_CLIENT_SECRET=your-client-secret-here
    COOKIE_SECRET=your-random-secret-here
    GOOGLE_API_KEY=your-api-key-here
-   REDIRECT_URI=https://jobseeker-analytics.onrender.com/login
+   DB_HOST=your-db-host-here
+   DB_NAME=your-db-name-here
+   DB_USER=your-db-user-here
+   DB_PASSWORD=your-db-password-here
    ```
    **🔒 Never share your `.env` file or commit it to Git!**  
 
@@ -107,13 +108,13 @@ Once your `.env` file is set up, start the app by following the instructions bel
 1. Create and activate virtual environment:
    ```sh
    # MAC/LINUX
-   python3 -m venv venv
-   source venv/bin/activate
+   python3 -m venv .venv
+   source .venv/bin/activate
    ```
    ```sh
    # WINDOWS (CMD)
-   python -m venv venv
-   venv\Scripts\activate
+   python -m venv .venv
+   .venv\Scripts\activate
    ```
    
 2. Install dependencies:
@@ -122,6 +123,7 @@ Once your `.env` file is set up, start the app by following the instructions bel
    ```
 4. Run FastAPI Server Locally:
    ```sh
+   cd backend
    uvicorn main:app --reload
    ```
 6. Check it out @:
@@ -159,11 +161,30 @@ You can view logs from the app by finding your container in Docker Desktop/Docke
    git add .
    git commit -m "Add submission guidelines and env setup"
    ```
-5. **Push to your fork**:  
+   Note: if you end up using a new Python library (e.g. I just added `ruff`) with `pip install`, be sure to do the following from the `backend` folder:
+   `pip freeze > requirements.txt`
+
+   You will need to add the `requirements.txt` file change as a commit, to ensure the environment has all its dependencies and production and local development environments run smoothly.
+   ```sh
+   git add requirements.txt
+   git commit -m "add python library ruff"
+   ```
+
+5. **Format your changes** and commit them:
+
+- If you're using Python, run:
+   ```sh
+   ruff format path/to/your/code
+   git add .
+   git commit -m "format with ruff"
+   ```
+(Please ensure your code passes all linting checks before submitting a pull request.)
+
+6. **Push to your fork**:  
    ```sh
    git push origin docs/65-add-contribution-guidelines
    ```
-6. **Open a Pull Request** on GitHub.  
+7. **Open a Pull Request** on GitHub.  
 
 Please ensure your changes align with the project's goals and do your best to follow the below coding style guides.
 - Python: https://google.github.io/styleguide/pyguide.html

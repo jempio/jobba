@@ -2,6 +2,11 @@
 .DS_Store
 *.pem
 *.pyc
+.vscode/
+*.csv
+*.txt
+*.json
+.venv/
 
 # Debug logs
 npm-debug.log*

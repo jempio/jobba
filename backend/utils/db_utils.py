@@ -1,6 +1,5 @@
 import os
 import logging
-from auth_utils import AuthenticatedUser
 
 logger = logging.getLogger(__name__)
 
@@ -15,12 +14,12 @@ def export_to_csv(filepath: str, user_id: str, message_data: dict) -> None:
         logger.info("user_id:%s appending to existing CSV file", user_id)
         with open(main_filepath, "a", encoding="utf-8") as f:
             values = ",".join(
-            (
-                f'"{str(message_data[key][0])}"'
-                if "," in str(message_data[key][0])
-                else str(message_data[key][0])
-            )
-            for key in message_data
+                (
+                    f'"{str(message_data[key][0])}"'
+                    if "," in str(message_data[key][0])
+                    else str(message_data[key][0])
+                )
+                for key in message_data
             )
             f.write(values + "\n")
     else:

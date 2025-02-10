@@ -1,0 +1,14 @@
+name: Run python linting checks
+on: 
+  push:
+    paths:
+      - '**.py'
+  pull_request:
+    paths:
+        - '**.py'
+jobs:
+  ruff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/ruff-action@v3
